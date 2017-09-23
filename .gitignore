@@ -7,4 +7,6 @@ bpm_detector.py
 overlay.py
 converter.py
 musicMaker.py
-generate_exe
+generate_exe.bat
+desktop.ini
+interval.mp3
