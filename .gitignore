@@ -2,6 +2,7 @@
 
 # musics
 /music
+/__pycache__
 
 bpm_detector.py
 overlay.py
