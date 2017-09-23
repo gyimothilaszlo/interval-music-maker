@@ -1,1 +1,0 @@
-cxfreeze intervalMusicMaker.py --target-dir dist

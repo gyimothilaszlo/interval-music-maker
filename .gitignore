@@ -2,3 +2,9 @@
 
 # musics
 /music
+
+bpm_detector.py
+overlay.py
+converter.py
+musicMaker.py
+generate_exe
