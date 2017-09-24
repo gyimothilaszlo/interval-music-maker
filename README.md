@@ -11,6 +11,13 @@ Use the pip tool to install pydub or tkinter:
 pip install pydub
 pip install tkinter
 ```
+
+You can download Python from here:
+https://www.python.org/downloads/release/python-362/
+
+Pip is a command line tool that makes installing python modules really easy. The most convenient method for installing it is to use the get-pip.py script.
+https://pip.pypa.io/en/stable/installing/
+
 You should also create a "music/" folder with your musics that you would like to include in your interval training session.
 ## Usage
 To start the application, enter
