@@ -4,9 +4,9 @@ Adds countdowns to your interval training musics. Check "example.mp3" in the roo
 ## Getting started
 You should have Python 3 installed with the following packages:
 
-pydub
+- pydub
 
-tkinter
+- tkinter
 
 Use the pip tool to install pydub or tkinter:
 ```
