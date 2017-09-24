@@ -17,8 +17,8 @@ class GUI:
 		self.master.configure(background=self.bgcolor)
 		
 		Label(text="Interval Music Maker", font=("Helvetica", 16), bg =self.bgcolor).grid(row=0,columnspan=2, padx = 5, pady = 5)
-		Label(text="Work lengths", font=("Verdana", 13), relief=RIDGE,bg ="azure2", width = 15).grid(row=1,column=0)
-		Label(text="Repeats", font=("Verdana", 13), relief=RIDGE,bg ="azure3", width=10).grid(row=1,column=1)
+		Label(text="Work lengths", font=("Verdana", 13), relief=RIDGE,fg="white", bg="saddle brown", width = 15).grid(row=1,column=0)
+		Label(text="Repeats", font=("Verdana", 13), relief=RIDGE,fg="white", bg="saddle brown", width=10).grid(row=1,column=1)
 		r = 2	
 		for wl, col in zip(worklengths, self.colors):
 			Label(text=str(wl) + " sec", bg=col,  font=("Verdana", 13), relief=RIDGE,width=15).grid(row=r,column=0)
@@ -26,7 +26,7 @@ class GUI:
 			e.grid(row=r,column=1)
 			self.entryfields.append(e)
 			r = r + 1
-		Label(text="recovery factor", bg="saddle brown",  font=("Verdana", 13), relief=RIDGE,width=15).grid(row=r,column=0)
+		Label(text="recovery factor", fg="white", bg="saddle brown",  font=("Verdana", 13), relief=RIDGE,width=15).grid(row=r,column=0)
 		self.recovEntryField=Entry(relief=SUNKEN,width=10, font=("Courier New", 13))
 		self.recovEntryField.grid(row=r, column=1, pady = 10)
 		self.recovEntryField.insert(0, "0.5")
@@ -81,14 +81,20 @@ class IntervalMusicCreator:
 			musicIdx = musicNum % len(musicfiles)
 
 		print("total music length: ", str(int(musiclength // 60)) + " minutes, " + str(round(musiclength % 60)) + " seconds")
-		print("number of songs: ", musicNum)
+		print("songs: ", musicfiles[:min(musicNum,len(musicfiles))])
 	def createIntervalMusic(self):
 		am = AudioMerger(self.music)
 		for start, end in zip(self.startTimes, self.endTimes):
 			am.addCountBack(start, True)
 			am.addCountBack(end, False)
 		am.exportMusic("interval")
-		
+
+def printWorkout(worklengths, worklengthRepeats, recovFactor):
+	print("Your workout:")
+	for wl, rep in zip(worklengths, worklengthRepeats):
+		for i in range(rep):
+			print("Interval pace run for " + str(wl) + " seconds")
+			print("Easy pace run for " + str(int(wl*recovFactor)) + " seconds")
 
 worklengths = [300, 180, 120, 90, 60, 30]
 root = Tk()
@@ -97,8 +103,7 @@ root.mainloop()
 
 worklengthRepeats = gui.repeats
 recovFactor = gui.recoveryFactor
-print("submitted: ", worklengthRepeats)
-print("recoveryFactor: ", recovFactor)
+printWorkout(worklengths, worklengthRepeats, recovFactor)
 
 imc = IntervalMusicCreator(worklengths, worklengthRepeats, recovFactor)
 imc.run()
