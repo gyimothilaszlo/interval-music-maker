@@ -1,5 +1,5 @@
 # Music Maker for Interval Running
-Adds countdowns to your interval training musics.
+Adds countdowns to your interval training musics. Check "example.mp3" in the root folder!
 
 ## Getting started
 You should have Python 3 installed with the following packages:
