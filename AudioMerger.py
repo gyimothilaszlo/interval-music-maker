@@ -12,9 +12,6 @@ class AudioMerger:
 			sound += self.additionalGain
 			self.voices[voice] = sound
 
-	def getMusicLength(self):
-		return len(music);
-
 	def addCountBack(self, startTime, isRun = True):
 		for i in range(1, 6):
 			voice = self.voices[self.voice_tags[i - 1]]

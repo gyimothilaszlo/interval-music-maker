@@ -13,6 +13,7 @@ from GUI import *
 class IntervalMusicCreator:
 	ofsetSeconds = 10
 	chunkSizeSec = 300
+	guardbandSec = 2
 	filename = "interval.mp3"
 	def __init__ (self, worklengths, worklengthRepeats, recovFactor, path = "music/"):
 		self.worklengthRepeats = worklengthRepeats
@@ -44,8 +45,7 @@ class IntervalMusicCreator:
 	def calculateChunkSplitTimes(self):
 		self.chunkSplitTimes = []
 		lastSplitTime = 0
-		self.guardbandSec = 2
-		for et in self.endTimes:
+		for et in self.endTimes[:-1]:
 			if (et - lastSplitTime) > self.chunkSizeSec:
 				lastSplitTime = et + self.guardbandSec
 				self.chunkSplitTimes.append(lastSplitTime)
@@ -61,9 +61,8 @@ class IntervalMusicCreator:
 		musicIdx, musicNum, musiclength = 0, 0, 0
 		self.musicList = []
 		while musiclength < self.totalTime:
-			length = float(mediainfo(musicfileNames[musicIdx])["duration"])
 			self.musicList.append(musicfileNames[musicIdx])
-			musiclength += length
+			musiclength += float(mediainfo(musicfileNames[musicIdx])["duration"])
 			musicNum += 1
 			musicIdx = musicNum % len(musicfileNames)
 
@@ -79,21 +78,23 @@ class IntervalMusicCreator:
 			else:
 				self.chunklength = self.chunkSplitTimes[i]
 
-			while len(self.music) < self.chunklength * 1000:
+			self.chunklengthMsec = self.chunklength * 1000
+
+			while len(self.music) < self.chunklengthMsec:
 				self.music += AudioSegment.from_file(self.musicList[musicIdx])
+				self.music = self.music.set_frame_rate(44100)
 				musicIdx += 1
 
 			if self.finalChunk:
 				chunk = self.music
 			else:
-				chunk = self.music[:self.chunklength * 1000]
-				self.music = self.music[self.chunklength * 1000:]
+				chunk = self.music[:self.chunklengthMsec]
+				self.music = self.music[self.chunklengthMsec:]
 
 			self.logProgress(0.2)
 			self.createSingleChunk(chunk, i)
 			self.logProgress(0.2)
 			self.updateTimes()
-
 		self.createChunkTxt()
 
 	def createSingleChunk(self, chunk, seqnum):
@@ -104,12 +105,12 @@ class IntervalMusicCreator:
 				am.addCountBack(s, True)
 				self.logProgress(0.3 / len(starts))
 			for e in ends:
-				self.logProgress(0.3 / len(ends))
 				am.addCountBack(e, False)
+				self.logProgress(0.3 / len(ends))
 
 			if self.finalChunk:
 				am.addCompleted(ends[-1] + 1)
-			am.music.export(self.musicpath + "chunk" + str(seqnum) + ".mp3", bitrate = "320k", format="mp3")
+			am.music.export(self.musicpath + "chunk" + str(seqnum) + ".mp3", bitrate = "192k", format="mp3")
 
 	def updateTimes(self):
 			self.chunkSplitTimes = [ct - self.chunklength for ct in self.chunkSplitTimes]
