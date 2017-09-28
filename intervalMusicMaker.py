@@ -102,10 +102,10 @@ class IntervalMusicCreator:
 			starts = list(s for s in self.startTimes if s < self.chunklength)
 			ends = list(s for s in self.endTimes if s < self.chunklength)
 			for s in starts:
-				am.addCountBack(s, True)
+				am.addCountdown(s, True)
 				self.logProgress(0.3 / len(starts))
 			for e in ends:
-				am.addCountBack(e, False)
+				am.addCountdown(e, False)
 				self.logProgress(0.3 / len(ends))
 
 			if self.finalChunk:
