@@ -17,11 +17,7 @@ class AudioMerger:
 			voice = self.voices[self.voice_tags[i - 1]]
 			self.music = self.music.overlay(voice, position = (startTime - i) * 1000)
 		self.music = self.music.overlay(self.voices["ten"], position = (startTime - 10) * 1000)
-
-		if isRun:
-			voice = self.voices["RUN"]
-		else:
-			voice = self.voices["relax"]
+		voice = self.voices["RUN" if isRun else "relax"]
 		self.music = self.music.overlay(voice, position = startTime * 1000)
 
 	def addCompleted(self, startTimeSec):
