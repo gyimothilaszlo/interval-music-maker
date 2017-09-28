@@ -1,8 +1,8 @@
 # Music Maker for Interval Running
-Create your own, personalized interval training music! Provided that you do time-based interval training (rather than distance-based one), this program can add countdowns to your musics at the right moments, so that you do not have to check your stopwatch all the time. The root folder includes an example output file ("example.mp3"), which can be used for the following interval workout:
-1 x 120 sec with 60 sec rest
-2 x 90 sec with 45 sec rest
-3 x 60 sec with 30 sec rest
+Create your own, personalized interval training music! Provided that you do time-based interval training (rather than distance-based one), this program can add countdowns to your musics at the right moments, so that you do not have to check your stopwatch all the time. The root folder includes an example output file ("example.mp3"), which can be used for the following interval workout:<br />
+1 x 120 sec with 60 sec rest<br />
+2 x 90 sec with 45 sec rest<br />
+3 x 60 sec with 30 sec rest<br />
 4 x 30 sec with 15 sec rest
 
 ## Getting started
