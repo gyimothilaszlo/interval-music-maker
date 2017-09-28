@@ -12,7 +12,7 @@ class AudioMerger:
 			sound += self.additionalGain
 			self.voices[voice] = sound
 
-	def addCountBack(self, startTime, isRun = True):
+	def addCountdown(self, startTime, isRun = True):
 		for i in range(1, 6):
 			voice = self.voices[self.voice_tags[i - 1]]
 			self.music = self.music.overlay(voice, position = (startTime - i) * 1000)
